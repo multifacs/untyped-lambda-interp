@@ -55,16 +55,16 @@ replaceLambda = go
   where
     go [] = []
     go xs
-      | "id" `isPrefixOf` xs = "\\x.x" ++ go (drop 2 xs)
-      | "tru" `isPrefixOf` xs = "\\t.\\f. t" ++ go (drop 3 xs)
-      | "fls" `isPrefixOf` xs = "\\t.\\f. f" ++ go (drop 3 xs)
-      | "scc" `isPrefixOf` xs = "\\n.\\s.\\z. s (n s z)" ++ go (drop 3 xs)
-      | "plus" `isPrefixOf` xs = "\\m.\\n.\\s.\\z. m s (n s z)" ++ go (drop 4 xs)
-      | "zero" `isPrefixOf` xs = "\\s.\\z. z" ++ go (drop 4 xs)
-      | "one" `isPrefixOf` xs = "\\s.\\z. s z" ++ go (drop 3 xs)
-      | "two" `isPrefixOf` xs = "\\s.\\z. s (s z)" ++ go (drop 3 xs)
-      | "three" `isPrefixOf` xs = "\\s.\\z. s (s (s z))" ++ go (drop 5 xs)
-      | "test" `isPrefixOf` xs = "\\l.\\m.\\.n (l m n)" ++ go (drop 4 xs)
+      | "id" `isPrefixOf` xs = "(\\x.x)" ++ go (drop 2 xs)
+      | "tru" `isPrefixOf` xs = "(\\t.\\f. t)" ++ go (drop 3 xs)
+      | "fls" `isPrefixOf` xs = "(\\t.\\f. f)" ++ go (drop 3 xs)
+      | "scc" `isPrefixOf` xs = "(\\n.\\s.\\z. s (n s z))" ++ go (drop 3 xs)
+      | "plus" `isPrefixOf` xs = "(\\m.\\n.\\s.\\z. m s (n s z))" ++ go (drop 4 xs)
+      | "zero" `isPrefixOf` xs = "(\\s.\\z. z)" ++ go (drop 4 xs)
+      | "one" `isPrefixOf` xs = "(\\s.\\z. s z)" ++ go (drop 3 xs)
+      | "two" `isPrefixOf` xs = "(\\s.\\z. s (s z))" ++ go (drop 3 xs)
+      | "three" `isPrefixOf` xs = "(\\s.\\z. s (s (s z)))" ++ go (drop 5 xs)
+      | "testt" `isPrefixOf` xs = "(\\l.\\m.\\.n (l m n))" ++ go (drop 4 xs)
       | otherwise = head xs : go (tail xs)
 
 parseLC :: String -> Either ParseError Term
